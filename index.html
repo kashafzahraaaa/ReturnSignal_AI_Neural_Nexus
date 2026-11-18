@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReturnSignal AI | Customer Operations Intelligence</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon">R</div>
+          <div>
+            <h2>ReturnSignal <span>AI</span></h2>
+            <small>Customer Intelligence</small>
+          </div>
+        </div>
+
+        <div class="nav-label">WORKSPACE</div>
+
+        <nav>
+          <a href="#overview" class="nav-link active"
+            >▦ <span>Executive Overview</span></a
+          >
+          <a href="#analyzer" class="nav-link"
+            >✧ <span>AI Complaint Analyzer</span></a
+          >
+          <a href="#review" class="nav-link"
+            >✓ <span>Review & Corrections</span></a
+          >
+          <a href="#products" class="nav-link"
+            >▤ <span>Product Intelligence</span></a
+          >
+          <a href="#patterns" class="nav-link"
+            >⌁ <span>Patterns & Anomalies</span></a
+          >
+          <a href="#unknown" class="nav-link"
+            >⚑ <span>Unknown / Uncategorized</span></a
+          >
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="status-dot"></div>
+          <span>Intelligence system online</span>
+          <small>Prototype environment</small>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <div class="eyebrow">CUSTOMER OPERATIONS / INTELLIGENCE</div>
+            <h1>Operations Dashboard</h1>
+            <p>
+              Turn customer complaints into actionable business intelligence.
+            </p>
+          </div>
+
+          <div class="top-actions">
+            <span class="live-status"><i></i> SYSTEM ONLINE</span>
+            <button class="primary-btn" onclick="refreshDashboard()">
+              ↻ Refresh data
+            </button>
+          </div>
+        </header>
+
+        <!-- EXECUTIVE OVERVIEW -->
+        <section id="overview" class="section">
+          <div class="section-heading">
+            <div>
+              <h2>Executive Overview</h2>
+              <p>
+                A live view of recorded complaint activity and operational
+                signals.
+              </p>
+            </div>
+            <span class="tag">LIVE DASHBOARD</span>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card">
+              <div class="stat-top">
+                <span>Total Complaints</span><span>▤</span>
+              </div>
+              <strong id="totalComplaints">0</strong>
+              <small>All submitted records</small>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-top">
+                <span>Products Affected</span><span>◈</span>
+              </div>
+              <strong id="productsAffected">0</strong>
+              <small>Unique product names</small>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-top">
+                <span>Unclear / New Issues</span><span>⚑</span>
+              </div>
+              <strong id="unknownCount">0</strong>
+              <small id="unknownRate">0% of complaints</small>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-top">
+                <span>High Severity</span><span>!</span>
+              </div>
+              <strong id="highSeverity">0</strong>
+              <small>Requires review</small>
+            </article>
+          </div>
+
+          <div class="two-column">
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h3>Complaint Category Distribution</h3>
+                  <p>Types of problems reported by customers</p>
+                </div>
+              </div>
+              <div class="chart-wrap"><canvas id="categoryChart"></canvas></div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h3>Product Complaint Ranking</h3>
+                  <p>Products ordered by complaint frequency</p>
+                </div>
+              </div>
+              <div id="topProducts" class="ranking-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- AI COMPLAINT ANALYZER -->
+        <section id="analyzer" class="section">
+          <div class="section-heading">
+            <div>
+              <h2>AI Complaint Analyzer</h2>
+              <p>
+                Select the product category and describe the issue. AI
+                identifies the complaint category automatically.
+              </p>
+            </div>
+          </div>
+
+          <article class="panel">
+            <form id="complaintForm">
+              <div class="form-grid">
+                <label>
+                  Product name
+                  <input
+                    id="productInput"
+                    required
+                    placeholder="e.g. Face Wash, Laptop, Shoes"
+                  />
+                </label>
+
+                <label>
+                  Product category
+                  <select id="productCategoryInput" required>
+                    <option value="">Select product category</option>
+                    <option value="Cosmetics & Beauty">
+                      Cosmetics & Beauty
+                    </option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Clothing & Fashion">
+                      Clothing & Fashion
+                    </option>
+                    <option value="Home Appliances">Home Appliances</option>
+                    <option value="Kitchenware & Utensils">
+                      Kitchenware & Utensils
+                    </option>
+                    <option value="Furniture & Home Decor">
+                      Furniture & Home Decor
+                    </option>
+                    <option value="Food & Beverages">Food & Beverages</option>
+                    <option value="Health & Personal Care">
+                      Health & Personal Care
+                    </option>
+                    <option value="Toys & Games">Toys & Games</option>
+                    <option value="Books & Stationery">
+                      Books & Stationery
+                    </option>
+                    <option value="Sports & Fitness">Sports & Fitness</option>
+                    <option value="Other Product Category">
+                      Other Product Category
+                    </option>
+                    <option value="Unknown / Uncategorized">
+                      Unknown / Uncategorized
+                    </option>
+                  </select>
+                </label>
+
+                <label>
+                  Severity
+                  <select id="severityInput" required>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                    <option value="Low">Low</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                Customer Complaint
+                <textarea
+                  id="complaintInput"
+                  required
+                  rows="4"
+                  placeholder="e.g. The face wash bottle was leaking, the product arrived broken, or the item was damaged."
+                ></textarea>
+              </label>
+
+              <button class="primary-btn" type="submit">
+                ✧ Analyze and save complaint
+              </button>
+            </form>
+
+            <div id="classificationResult" class="result-box hidden"></div>
+          </article>
+        </section>
+
+        <!-- REVIEW AND CORRECTIONS -->
+        <section id="review" class="section">
+          <div class="section-heading">
+            <div>
+              <h2>Review & Corrections</h2>
+              <p>
+                Complaints grouped by complaint category. Review and correct AI
+                classifications when necessary.
+              </p>
+            </div>
+          </div>
+
+          <article class="panel">
+            <div id="complaintTable" class="table-wrap"></div>
+          </article>
+        </section>
+
+        <!-- PRODUCT INTELLIGENCE -->
+        <section id="products" class="section">
+          <div class="section-heading">
+            <div>
+              <h2>Product Intelligence</h2>
+              <p>
+                Analyze products by their product categories and identify
+                recurring problems.
+              </p>
+            </div>
+          </div>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <h3>Complaints by Product Category</h3>
+                <p>Compare complaint volumes across product types</p>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="productCategoryChart"></canvas>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <h3>Complaints by Individual Product</h3>
+                <p>Compare complaint volumes across individual products</p>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="productChart"></canvas>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Product Category Breakdown</h3>
+            <div id="productCategoryBreakdown" class="product-breakdown"></div>
+          </article>
+
+          <article class="panel">
+            <h3>Product Issue Breakdown</h3>
+            <div id="productBreakdown" class="product-breakdown"></div>
+          </article>
+        </section>
+
+        <!-- PATTERNS AND ANOMALIES -->
+        <section id="patterns" class="section">
+          <div class="section-heading">
+            <div>
+              <h2>Patterns & Anomaly Detection</h2>
+              <p>
+                Monitor recurring complaint categories, product categories and
+                unusual changes in recorded activity.
+              </p>
+            </div>
+          </div>
+
+          <article class="panel">
+            <h3>Complaint Category Patterns</h3>
+            <div class="chart-wrap">
+              <canvas id="patternChart"></canvas>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Product Category Patterns</h3>
+            <div class="chart-wrap">
+              <canvas id="productPatternChart"></canvas>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Anomaly Signals</h3>
+            <div id="anomalyList" class="insight-list"></div>
+          </article>
+        </section>
+
+        <!-- UNKNOWN AND UNCATEGORIZED -->
+        <section id="unknown" class="section">
+          <div class="section-heading">
+            <div>
+              <h2>Unknown / Uncategorized</h2>
+              <p>
+                Review complaints with unclear product classifications or
+                complaint classifications.
+              </p>
+            </div>
+          </div>
+
+          <article class="panel">
+            <h3>Unknown Product Categories</h3>
+            <div id="unknownProductList" class="table-wrap"></div>
+          </article>
+
+          <article class="panel">
+            <h3>Unknown Complaint Categories</h3>
+            <div id="unknownList" class="table-wrap"></div>
+          </article>
+        </section>
+
+        <footer>
+          <strong>ReturnSignal AI</strong> · Customer Operations Intelligence
+          Platform
+          <span>Hackathon prototype · Human verification recommended</span>
+        </footer>
+      </main>
+    </div>
+
+    <script src="/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+complaint_id,date,product,complaint_text,category,severity
+C001,2026-11-01,Face Wash,The bottle was leaking when it arrived,Leakage,High
+C002,2026-11-02,Face Wash,The product quality is very poor,Poor Quality,Medium
+C003,2026-11-03,Face Wash,I received a different item than I ordered,Incorrect Delivery,High
+C004,2026-11-04,Wireless Earbuds,One earbud does not work,Electronic Defects,High
+C005,2026-11-05,Power Bank,The battery drains very quickly,Battery Problems,Medium
+C006,2026-11-06,Mobile Cover,My order was missing one item,Missing Items,Medium
+C007,2026-11-07,Face Wash,The bottle cap was broken and liquid spilled,Leakage,High
+C008,2026-11-08,Wireless Earbuds,The sound stopped working,Electronic Defects,High
+C009,2026-11-09,Mobile Cover,The colour is different from the advertised picture,Other / New Category,Low
+C010,2026-11-10,Power Bank,The package arrived without the charging cable,Missing Items,Medium
+C011,2026-11-11,Face Wash,,Unknown / Unclear Reasons,Low
+C012,2026-11-12,Wireless Earbuds,I like playing cricket,Out of Scope,Low
+C013,2026-11-13,Smart Watch,The watch arrived late,Other / New Category,Medium
+C014,2026-11-14,Power Bank,The battery overheats during charging,Battery Problems,High
+C015,2026-11-15,Face Wash,The quality is not as described,Poor Quality,Medium
